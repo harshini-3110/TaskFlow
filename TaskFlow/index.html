@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="TaskFlow — a quiet space for your next big idea."
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <title>TaskFlow · Make room for focus</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to tasks</a>
+    <div class="wrap">
+      <header>
+        <a href="./" class="brand">TaskFlow<span>↗</span></a>
+        <div class="row">
+          <span class="eyebrow">Your personal workspace</span
+          ><button id="new-task" class="primary">+ New task</button>
+        </div>
+      </header>
+      <main id="main">
+        <section class="hero">
+          <div>
+            <div class="eyebrow">Less noise. More progress.</div>
+            <h1>
+              Make room<br />for
+              <span style="color: var(--accent)">focus.</span>
+            </h1>
+            <p>
+              A clear view of what matters. Capture the idea, choose your next
+              move, and keep things flowing.
+            </p>
+          </div>
+          <div class="orb" aria-hidden="true"></div>
+        </section>
+        <div id="storage-warning" class="notice" role="status"></div>
+        <section class="stats" aria-label="Task overview">
+          <div class="stat featured">
+            <span class="muted">In motion</span
+            ><strong id="active-count">0</strong>
+          </div>
+          <div class="stat">
+            <span class="muted">Completed</span
+            ><strong id="done-count">0</strong>
+          </div>
+          <div class="stat">
+            <span class="muted">Completion</span><strong id="percent">0%</strong
+            ><progress
+              id="progress"
+              max="100"
+              value="0"
+              aria-label="Task completion"
+            ></progress>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="row between">
+            <h2>Your next moves</h2>
+            <span id="result-count" class="muted" aria-live="polite"></span>
+          </div>
+          <div class="toolbar">
+            <label
+              >Search<input
+                id="search"
+                type="search"
+                placeholder="Find a task…" /></label
+            ><label
+              >Status<select id="status" aria-label="Status">
+                <option value="all">All tasks</option>
+                <option value="active">Active</option>
+                <option value="done">Completed</option>
+                <option value="overdue">Overdue</option>
+              </select></label
+            ><label
+              >Priority<select
+                id="priority-filter"
+                aria-label="Filter priority"
+              >
+                <option value="all">Any priority</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+              </select></label
+            ><label
+              >Sort by<select id="sort" aria-label="Sort tasks">
+                <option value="newest">Newest first</option>
+                <option value="due">Due date</option>
+                <option value="priority">Priority</option>
+              </select></label
+            >
+          </div>
+          <div id="tasks" class="list"></div>
+        </section>
+      </main>
+    </div>
+    <dialog id="task-dialog">
+      <form id="task-form">
+        <div class="dialog-head">
+          <h2 id="dialog-title">New task</h2>
+          <button type="button" data-close aria-label="Close dialog">×</button>
+        </div>
+        <input type="hidden" name="id" /><label
+          >Task title<input
+            name="title"
+            required
+            maxlength="120"
+            placeholder="What needs your attention?" /></label
+        ><label
+          >Notes<textarea
+            name="notes"
+            maxlength="2000"
+            placeholder="A little context goes a long way"
+          ></textarea>
+        </label>
+        <div class="formgrid">
+          <label
+            >Priority<select name="priority">
+              <option>Medium</option>
+              <option>High</option>
+              <option>Low</option>
+            </select></label
+          ><label>Due date<input name="due" type="date" /></label>
+        </div>
+        <div class="row">
+          <button class="primary" type="submit">Save task</button
+          ><button type="button" data-close>Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
